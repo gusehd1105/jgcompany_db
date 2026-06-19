@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #111;
+}
+
+.mobile-page {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+}
+
+.banner-img {
+  width: 100%;
+  display: block;
+}
+
+.form-card {
+  padding: 24px 18px;
+  background: #fff;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  text-align: center;
+}
+
+.sub {
+  margin-bottom: 22px;
+  color: #555;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.check input {
+  width: auto;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 18px;
+  border: none;
+  border-radius: 14px;
+  background: #00d400;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  animation: pulseBtn 0.9s infinite;
+}
+
+@keyframes pulseBtn {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+}
+
+#result {
+  margin-top: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #00b300;
+}
+
+.live-card {
+  padding: 20px 18px 40px;
+  background: #f7f9fb;
+}
+
+.live-card h2 {
+  margin: 0 0 14px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.live-box {
+  height: 230px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid #00d400;
+  border-radius: 16px;
+}
+
+.live-list {
+  animation: scrollUp 18s linear infinite;
+}
+
+.live-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.live-name {
+  font-weight: bold;
+}
+
+.live-date {
+  color: #666;
+  text-align: center;
+}
+
+.live-status {
+  text-align: right;
+  font-weight: bold;
+  color: #00b300;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}

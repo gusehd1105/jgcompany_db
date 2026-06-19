@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상담 신청</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="mobile-page">
+      <img
+        id="topImage"
+        class="banner-img"
+        src="img1-1.png"
+        alt="이벤트 배너"
+      />
+
+      <img class="banner-img" src="img2.png" alt="안내 배너" />
+
+      <section class="form-card">
+        <h1>무료 상담 신청</h1>
+        <p class="sub">정보를 남겨주시면 빠르게 연락드리겠습니다.</p>
+
+        <form id="leadForm">
+          <label>이름</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="이름을 입력하세요"
+            required
+          />
+
+          <label>연락처</label>
+          <input type="tel" name="phone" placeholder="010-0000-0000" required />
+
+          <label>문의내용</label>
+          <textarea
+            name="message"
+            placeholder="궁금한 내용을 적어주세요"
+          ></textarea>
+
+          <label class="check">
+            <input type="checkbox" required />
+            개인정보 수집 및 이용에 동의합니다.
+          </label>
+
+          <button type="submit">상담 신청하기</button>
+        </form>
+
+        <p id="result"></p>
+      </section>
+
+      <section class="live-card">
+        <h2>실시간 신청현황</h2>
+
+        <div class="live-box">
+          <div id="liveList" class="live-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
