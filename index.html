@@ -6,58 +6,162 @@
     <title>상담 신청</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <main class="mobile-page">
-      <img
-        id="topImage"
-        class="banner-img"
-        src="img1-1.png"
-        alt="이벤트 배너"
-      />
+      <img class="banner-img move-form" src="a1.png" alt="이벤트 배너" />
+      <img class="banner-img move-form" src="a2.png" alt="안내 배너" />
 
-      <img class="banner-img" src="img2.png" alt="안내 배너" />
-
-      <section class="form-card">
-        <h1>무료 상담 신청</h1>
-        <p class="sub">정보를 남겨주시면 빠르게 연락드리겠습니다.</p>
-
+      <section class="form-section" id="formSection">
         <form id="leadForm">
-          <label>이름</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="이름을 입력하세요"
-            required
-          />
+          <div class="question">
+            <p>Q. 희망 통신사를 선택해주세요.</p>
+            <div class="option-grid three">
+              <button type="button" class="option">SK</button>
+              <button type="button" class="option active">LG</button>
+              <button type="button" class="option">KT</button>
+            </div>
+          </div>
 
-          <label>연락처</label>
-          <input type="tel" name="phone" placeholder="010-0000-0000" required />
+          <div class="question">
+            <p>Q. 원하시는 상품을 선택해주세요.</p>
+            <div class="option-grid three">
+              <button type="button" class="option">인터넷</button>
+              <button type="button" class="option active">인터넷+TV</button>
+              <button type="button" class="option">인터넷+TV+유심</button>
+            </div>
+          </div>
 
-          <label>문의내용</label>
-          <textarea
-            name="message"
-            placeholder="궁금한 내용을 적어주세요"
-          ></textarea>
+          <div class="question">
+            <p>Q. 상담 가능시간을 선택해주세요.</p>
+            <div class="option-grid time">
+              <button type="button" class="option active">
+                아무 시간 가능
+              </button>
+              <button type="button" class="option">오전 10시~12시</button>
+              <button type="button" class="option">오후 12시~1시</button>
+              <button type="button" class="option">오후 1시~3시</button>
+              <button type="button" class="option">오후 3시~5시</button>
+              <button type="button" class="option">오후 5시 이후</button>
+            </div>
+          </div>
 
-          <label class="check">
-            <input type="checkbox" required />
-            개인정보 수집 및 이용에 동의합니다.
+          <hr />
+
+          <div class="form-row">
+            <label>성함</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="성함을 입력해주세요."
+              pattern="^[가-힣]{2,5}$"
+              maxlength="5"
+              required
+            />
+          </div>
+
+          <div class="form-row phone-row">
+            <label>연락처</label>
+            <div class="phone-inputs">
+              <select name="phone1">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="017">017</option>
+                <option value="019">019</option>
+              </select>
+              <span>-</span>
+              <input
+                type="tel"
+                name="phone2"
+                maxlength="4"
+                inputmode="numeric"
+                required
+              />
+              <span>-</span>
+              <input
+                type="tel"
+                name="phone3"
+                maxlength="4"
+                inputmode="numeric"
+                required
+              />
+            </div>
+          </div>
+
+          <label class="agree">
+            <input type="checkbox" required checked />
+            개인정보 취급방침 동의
+            <button type="button" class="privacy-btn" id="privacyOpen">
+              [자세히 보기]
+            </button>
           </label>
 
-          <button type="submit">상담 신청하기</button>
-        </form>
+          <p class="notice">*재약정은 이벤트혜택에서 제외됩니다.</p>
 
-        <p id="result"></p>
+          <button type="submit" class="submit-btn">최대 지원금 확인하기</button>
+
+          <p id="result"></p>
+        </form>
       </section>
 
-      <section class="live-card">
-        <h2>실시간 신청현황</h2>
+      <section class="status-section">
+        <div class="status-card">
+          <p class="status-date" id="todayText"></p>
+          <h2>실시간 접수 현황 안내</h2>
 
-        <div class="live-box">
-          <div id="liveList" class="live-list"></div>
+          <div class="status-counts">
+            <div>
+              <span>오늘의 상담</span>
+              <strong id="todayCount">45</strong>
+            </div>
+
+            <div>
+              <span>진행중</span>
+              <strong id="consultCount">892</strong>
+            </div>
+
+            <div>
+              <span>완료</span>
+              <strong id="installCount">4200</strong>
+            </div>
+          </div>
+
+          <div class="status-table">
+            <div class="table-head">
+              <span>이름</span>
+              <span>구분</span>
+              <span>신청상품</span>
+              <span>진행상태</span>
+            </div>
+
+            <div class="status-scroll-box">
+              <div id="statusList" class="status-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-footer">
+          <p>
+            ※ 지원 혜택은 설치 완료 후 순차 지급되며,<br />
+            가입 상품 및 지역에 따라 차이가 있을 수 있습니다.
+          </p>
+
+          <p>
+            인터넷 가입 상담센터<br />
+            사업자등록번호 : 199-58-00806
+          </p>
         </div>
       </section>
     </main>
+
+    <div class="modal-overlay" id="privacyModal">
+      <div class="modal-box">
+        <h3>개인정보 취급방침</h3>
+        <p>앙앙</p>
+        <button type="button" id="privacyClose">닫기</button>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
