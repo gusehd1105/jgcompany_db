@@ -1,3 +1,6 @@
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbwvBZ8eR4nhP4Qh9XVEpgYq-1IiRxCZc-SfMWGjcZGubENjCUkdL_8cVTHHbNdo/exec";
+
 document.querySelectorAll(".move-form").forEach((image) => {
   image.addEventListener("click", () => {
     document.getElementById("formSection").scrollIntoView({
@@ -21,6 +24,8 @@ document.querySelectorAll(".option-grid").forEach((group) => {
 const privacyOpen = document.getElementById("privacyOpen");
 const privacyClose = document.getElementById("privacyClose");
 const privacyModal = document.getElementById("privacyModal");
+const successModal = document.getElementById("successModal");
+const successClose = document.getElementById("successClose");
 
 privacyOpen.addEventListener("click", () => {
   privacyModal.classList.add("show");
@@ -36,13 +41,23 @@ privacyModal.addEventListener("click", (e) => {
   }
 });
 
+successClose.addEventListener("click", () => {
+  successModal.classList.remove("show");
+});
+
+successModal.addEventListener("click", (e) => {
+  if (e.target === successModal) {
+    successModal.classList.remove("show");
+  }
+});
+
 const leadForm = document.getElementById("leadForm");
 const nameInput = leadForm.name;
 const phone2Input = leadForm.phone2;
 const phone3Input = leadForm.phone3;
 
 nameInput.addEventListener("input", () => {
-  nameInput.value = nameInput.value.replace(/[^가-힣]/g, "");
+  nameInput.value = nameInput.value.replace(/[^가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, "");
 });
 
 [phone2Input, phone3Input].forEach((input) => {
@@ -51,359 +66,159 @@ nameInput.addEventListener("input", () => {
   });
 });
 
-leadForm.addEventListener("submit", function (e) {
+leadForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const name = this.name.value.trim();
   const phone2 = this.phone2.value.trim();
   const phone3 = this.phone3.value.trim();
 
-  if (!/^[가-힣]{2,5}$/.test(name)) {
+  if (!/^[가-힣ㄱ-ㅎㅏ-ㅣ\s]+$/.test(name) || name.length < 1) {
     document.getElementById("result").textContent =
-      "성함은 한글 2~5자로 입력해주세요.";
+      "성함은 한글로 입력해주세요.";
     this.name.focus();
     return;
   }
 
-  if (!/^[0-9]{3,4}$/.test(phone2) || !/^[0-9]{4}$/.test(phone3)) {
+  if (!/^[0-9]{4}$/.test(phone2) || !/^[0-9]{4}$/.test(phone3)) {
     document.getElementById("result").textContent =
-      "연락처를 숫자로 정확히 입력해주세요.";
+      "연락처를 끝까지 정확히 입력해주세요.";
     return;
   }
 
   const phone = this.phone1.value + "-" + phone2 + "-" + phone3;
 
-  console.log({
-    telecom: document.querySelectorAll(".question")[0].querySelector(".active")
-      .textContent,
-    product: document.querySelectorAll(".question")[1].querySelector(".active")
-      .textContent,
-    time: document.querySelectorAll(".question")[2].querySelector(".active")
-      .textContent,
-    name,
-    phone,
-  });
+  const telecom = document
+    .querySelectorAll(".question")[0]
+    .querySelector(".active").textContent;
 
-  document.getElementById("result").textContent =
-    "신청이 완료되었습니다. 곧 연락드리겠습니다.";
+  const product = document
+    .querySelectorAll(".question")[1]
+    .querySelector(".active").textContent;
 
-  this.reset();
+  const time = document
+    .querySelectorAll(".question")[2]
+    .querySelector(".active").textContent;
 
-  document.querySelectorAll(".option-grid").forEach((group) => {
-    group
-      .querySelectorAll(".option")
-      .forEach((btn) => btn.classList.remove("active"));
-    group.querySelector(".option").classList.add("active");
-  });
+  const submitBtn = this.querySelector(".submit-btn");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "신청 중...";
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify({
+        name,
+        phone,
+        telecom,
+        product,
+        time,
+      }),
+    });
+
+    document.getElementById("result").textContent = "";
+    successModal.classList.add("show");
+
+    this.reset();
+
+    document.querySelectorAll(".option-grid").forEach((group) => {
+      group
+        .querySelectorAll(".option")
+        .forEach((btn) => btn.classList.remove("active"));
+      group.querySelector(".option").classList.add("active");
+    });
+  } catch (error) {
+    console.error(error);
+    document.getElementById("result").textContent =
+      "신청 중 오류가 발생했습니다. 다시 시도해주세요.";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "최대 지원금 확인하기";
+  }
 });
 
-const todayText = document.getElementById("todayText");
-const today = new Date();
-
-todayText.textContent = `${today.getFullYear()}-${String(
-  today.getMonth() + 1,
-).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")} 기준`;
-
-const customers = [
-  "김*현",
-  "김*우",
-  "김*민",
-  "김*서",
-  "김*진",
-  "김*아",
-  "김*영",
-  "김*훈",
-  "박*준",
-  "박*희",
-  "박*호",
-  "박*빈",
-  "박*연",
-  "박*수",
-  "박*영",
-  "박*재",
-  "이*영",
-  "이*호",
-  "이*민",
-  "이*은",
-  "이*준",
-  "이*서",
-  "이*진",
-  "이*원",
-  "최*민",
-  "최*훈",
-  "최*아",
-  "최*우",
-  "최*영",
-  "최*서",
-  "최*빈",
-  "최*재",
-  "정*우",
-  "정*민",
-  "정*현",
-  "정*아",
-  "정*훈",
-  "정*연",
-  "정*빈",
-  "정*호",
-  "강*서",
-  "강*성",
-  "강*훈",
-  "강*민",
-  "강*아",
-  "강*우",
-  "강*진",
-  "강*연",
-  "윤*아",
-  "윤*호",
-  "윤*민",
-  "윤*서",
-  "윤*재",
-  "윤*빈",
-  "윤*진",
-  "윤*영",
-  "송*훈",
-  "송*현",
-  "송*아",
-  "송*민",
-  "송*우",
-  "송*연",
-  "송*빈",
-  "송*재",
-  "한*진",
-  "한*우",
-  "한*서",
-  "한*민",
-  "한*호",
-  "한*아",
-  "한*연",
-  "한*빈",
-  "오*라",
-  "오*민",
-  "오*현",
-  "오*준",
-  "오*서",
-  "오*영",
-  "오*훈",
-  "오*빈",
-  "임*지",
-  "임*현",
-  "임*우",
-  "임*민",
-  "임*서",
-  "임*아",
-  "임*호",
-  "임*연",
-  "유*석",
-  "유*민",
-  "유*빈",
-  "유*진",
-  "유*서",
-  "유*호",
-  "유*아",
-  "유*재",
-  "배*아",
-  "배*현",
-  "배*민",
-  "배*준",
-  "배*서",
-  "배*영",
-  "배*호",
-  "배*진",
-  "문*준",
-  "문*영",
-  "문*서",
-  "문*민",
-  "문*훈",
-  "문*아",
-  "문*재",
-  "문*빈",
-  "신*호",
-  "신*민",
-  "신*우",
-  "신*아",
-  "신*서",
-  "신*연",
-  "신*현",
-  "신*재",
-  "홍*연",
-  "홍*민",
-  "홍*우",
-  "홍*서",
-  "홍*진",
-  "홍*빈",
-  "홍*아",
-  "홍*호",
-  "장*원",
-  "장*민",
-  "장*희",
-  "장*우",
-  "장*서",
-  "장*현",
-  "장*빈",
-  "장*호",
-  "남*희",
-  "남*우",
-  "남*민",
-  "남*진",
-  "남*아",
-  "남*서",
-  "남*현",
-  "남*훈",
-  "권*수",
-  "권*민",
-  "권*호",
-  "권*서",
-  "권*영",
-  "권*빈",
-  "권*재",
-  "권*아",
-  "서*빈",
-  "서*준",
-  "서*현",
-  "서*우",
-  "서*아",
-  "서*영",
-  "서*민",
-  "서*호",
-  "전*경",
-  "전*민",
-  "전*우",
-  "전*서",
-  "전*현",
-  "전*아",
-  "전*빈",
-  "전*호",
-  "조*율",
-  "조*민",
-  "조*현",
-  "조*아",
-  "조*우",
-  "조*서",
-  "조*빈",
-  "조*호",
-  "안*호",
-  "안*민",
-  "안*서",
-  "안*현",
-  "안*우",
-  "안*아",
-  "안*빈",
-  "안*재",
-  "백*희",
-  "백*민",
-  "백*우",
-  "백*서",
-  "백*현",
-  "백*아",
-  "백*빈",
-  "백*호",
-  "황*경",
-  "황*민",
-  "황*우",
-  "황*서",
-  "황*현",
-  "황*아",
-  "황*빈",
-  "황*호",
+const reviews = [
+  ["김*현", "LG", "2026-06-24", "상담이 생각보다 빠르게 진행돼서 좋았습니다. 조건도 깔끔하게 설명해줘서 바로 신청했어요."],
+  ["박*준", "KT", "2026-06-24", "복잡할 줄 알았는데 필요한 내용만 알려줘서 편했습니다. 설치 일정도 빠르게 잡혔어요."],
+  ["이*영", "SKT", "2026-06-23", "지원금 기준을 자세히 설명해줘서 믿고 진행했습니다. 상담원이 친절했어요."],
+  ["최*민", "LG", "2026-06-23", "기존 요금이랑 비교해서 알려줘서 선택하기 쉬웠습니다. 안내가 깔끔했습니다."],
+  ["정*우", "KT", "2026-06-22", "전화 상담 후 바로 진행했는데 생각보다 절차가 간단했습니다. 만족합니다."],
+  ["강*서", "SKT", "2026-06-22", "상품별 차이를 쉽게 설명해줘서 좋았습니다. 괜히 오래 고민했네요."],
+  ["윤*아", "LG", "2026-06-21", "상담 시간이 짧았는데 핵심만 잘 알려줬습니다. 조건도 만족스러웠어요."],
+  ["송*훈", "KT", "2026-06-21", "처음 신청해보는 거라 걱정했는데 안내가 친절해서 편하게 했습니다."],
+  ["한*진", "SKT", "2026-06-20", "지원금이랑 설치 날짜를 한 번에 확인할 수 있어서 좋았습니다."],
+  ["오*민", "LG", "2026-06-20", "상담 후 바로 비교가 되니까 결정하기 쉬웠습니다. 응대도 빨랐어요."],
+  ["임*지", "KT", "2026-06-19", "문의 남기고 금방 연락이 와서 좋았습니다. 설명도 차분하게 해줬어요."],
+  ["유*석", "LG", "2026-06-19", "요금제 설명이 복잡하지 않아서 좋았습니다. 부모님 집도 추가로 문의했어요."],
+  ["배*아", "SKT", "2026-06-18", "설치 가능 여부부터 혜택까지 한 번에 안내받았습니다. 편했습니다."],
+  ["문*준", "KT", "2026-06-18", "불필요한 말 없이 조건을 바로 알려줘서 좋았습니다. 상담 만족합니다."],
+  ["신*호", "LG", "2026-06-17", "기존 인터넷 약정 끝나서 문의했는데 비교 안내가 도움이 많이 됐습니다."],
+  ["홍*연", "SKT", "2026-06-17", "상담 신청 후 연락이 빨랐고 진행 과정도 어렵지 않았습니다."],
+  ["장*민", "KT", "2026-06-16", "혜택 차이를 정확히 알려줘서 결정하기 쉬웠습니다. 친절했어요."],
+  ["서*빈", "LG", "2026-06-16", "설치 일정까지 같이 잡아줘서 편했습니다. 안내가 빠르고 깔끔했습니다."],
+  ["전*우", "SKT", "2026-06-15", "전화로 자세히 알려줘서 믿고 신청했습니다. 조건도 만족스러웠습니다."],
+  ["조*현", "KT", "2026-06-15", "상품 선택이 어려웠는데 상황에 맞게 추천해줘서 좋았습니다."],
+  ["안*민", "LG", "2026-06-14", "상담원이 차분하게 설명해줘서 이해하기 쉬웠습니다. 신청까지 금방 했어요."],
+  ["백*서", "SKT", "2026-06-14", "지원금 안내가 투명해서 좋았습니다. 추가 문의도 바로 답변 받았습니다."],
+  ["황*민", "KT", "2026-06-13", "상담 가능 시간에 맞춰 연락줘서 편했습니다. 진행도 빠릅니다."],
+  ["차*현", "LG", "2026-06-13", "인터넷이랑 TV 같이 묶는 조건을 잘 설명해줘서 만족했습니다."],
+  ["노*진", "SKT", "2026-06-12", "처음엔 반신반의했는데 상담 받아보니 정리가 잘 됐습니다."],
+  ["하*준", "KT", "2026-06-12", "요금이랑 혜택을 비교해서 알려줘서 바로 결정할 수 있었습니다."],
+  ["김*아", "LG", "2026-06-11", "상담 신청하고 금방 연락이 왔습니다. 안내 내용도 이해하기 쉬웠어요."],
+  ["박*현", "SKT", "2026-06-11", "설치 가능 지역 확인부터 빠르게 도와줘서 좋았습니다."],
+  ["이*서", "KT", "2026-06-10", "여러 상품 중에 뭐가 나은지 알려줘서 선택이 쉬웠습니다."],
+  ["최*영", "LG", "2026-06-10", "친절하고 빠른 상담이 좋았습니다. 조건도 괜찮아서 신청했어요."],
 ];
 
-const telecoms = ["LG", "SKT", "KT"];
+const reviewTrack = document.getElementById("reviewTrack");
 
-const productPool = [
-  "인터넷+TV+유심",
-  "인터넷+TV+유심",
-  "인터넷+TV+유심",
-  "인터넷+TV+유심",
-  "인터넷+TV+유심",
-  "인터넷+TV+유심",
-  "인터넷+TV",
-  "인터넷+TV",
-  "인터넷+TV",
-  "인터넷",
-  "인터넷",
-];
-
-const statusTypes = [
-  { text: "상담중", className: "badge-call" },
-  { text: "진행중", className: "badge-wait" },
-  { text: "상담완료", className: "badge-done" },
-  { text: "지급완료", className: "badge-paid" },
-];
-
-function randomItem(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function makeRow() {
-  const status = randomItem(statusTypes);
+function makeReviewCard(review) {
+  const [name, telecom, date, text] = review;
 
   return `
-    <div class="table-row">
-      <span>${randomItem(customers)}</span>
-      <span>${randomItem(telecoms)}</span>
-      <span>${randomItem(productPool)}</span>
-      <span>
-        <span class="badge ${status.className}">
-          ${status.text}
-        </span>
-      </span>
+    <div class="review-card">
+      <div class="review-top">
+        <span class="review-name">${name}</span>
+        <span class="review-date">${date}</span>
+      </div>
+
+      <div class="review-stars">★★★★★</div>
+
+      <p class="review-text">${text}</p>
+
+      <div class="review-bottom">
+        <span class="review-telecom">${telecom}</span>
+        <span class="review-badge">상담 완료</span>
+      </div>
     </div>
   `;
 }
 
-const statusList = document.getElementById("statusList");
+reviews.forEach((review) => {
+  reviewTrack.insertAdjacentHTML("beforeend", makeReviewCard(review));
+});
 
-for (let i = 0; i < 12; i++) {
-  statusList.insertAdjacentHTML("beforeend", makeRow());
-}
+let reviewIndex = 0;
 
 setInterval(() => {
-  statusList.style.transition = "transform 1s ease";
-  statusList.style.transform = "translateY(-55px)";
+  const card = document.querySelector(".review-card");
+  if (!card) return;
 
-  setTimeout(() => {
-    statusList.style.transition = "none";
-    statusList.style.transform = "translateY(0)";
-    statusList.firstElementChild.remove();
-    statusList.insertAdjacentHTML("beforeend", makeRow());
-  }, 1050);
-}, 7200);
+  const cardWidth = card.offsetWidth + 14;
+  reviewIndex++;
 
-let todayCount = 45;
-let consultCount = 892;
-let installCount = 4200;
+  reviewTrack.style.transform = `translateX(-${cardWidth * reviewIndex}px)`;
 
-const todayCountEl = document.getElementById("todayCount");
-const consultCountEl = document.getElementById("consultCount");
-const installCountEl = document.getElementById("installCount");
+  if (reviewIndex >= reviews.length - 1) {
+    setTimeout(() => {
+      reviewTrack.style.transition = "none";
+      reviewIndex = 0;
+      reviewTrack.style.transform = "translateX(0)";
 
-todayCountEl.textContent = todayCount.toLocaleString();
-consultCountEl.textContent = consultCount.toLocaleString();
-installCountEl.textContent = installCount.toLocaleString();
-
-function countUp(element, start, end, duration) {
-  const startTime = performance.now();
-
-  function update(now) {
-    const progress = Math.min((now - startTime) / duration, 1);
-    const value = Math.floor(start + (end - start) * progress);
-
-    element.textContent = value.toLocaleString();
-
-    if (progress < 1) requestAnimationFrame(update);
+      setTimeout(() => {
+        reviewTrack.style.transition = "transform 1.1s ease";
+      }, 50);
+    }, 1200);
   }
-
-  requestAnimationFrame(update);
-}
-
-setInterval(() => {
-  const nextToday = todayCount + 1;
-  countUp(todayCountEl, todayCount, nextToday, 2400);
-  todayCount = nextToday;
-}, 24000);
-
-setInterval(() => {
-  const nextConsult = consultCount + 1;
-  countUp(consultCountEl, consultCount, nextConsult, 2800);
-  consultCount = nextConsult;
-}, 32000);
+}, 5600);

@@ -35,9 +35,7 @@
           <div class="question">
             <p>Q. 상담 가능시간을 선택해주세요.</p>
             <div class="option-grid time">
-              <button type="button" class="option active">
-                아무 시간 가능
-              </button>
+              <button type="button" class="option active">아무 시간 가능</button>
               <button type="button" class="option">오전 10시~12시</button>
               <button type="button" class="option">오후 12시~1시</button>
               <button type="button" class="option">오후 1시~3시</button>
@@ -54,8 +52,7 @@
               type="text"
               name="name"
               placeholder="성함을 입력해주세요."
-              pattern="^[가-힣]{2,5}$"
-              maxlength="5"
+              autocomplete="name"
               required
             />
           </div>
@@ -75,7 +72,9 @@
                 type="tel"
                 name="phone2"
                 maxlength="4"
+                minlength="4"
                 inputmode="numeric"
+                pattern="[0-9]{4}"
                 required
               />
               <span>-</span>
@@ -83,7 +82,9 @@
                 type="tel"
                 name="phone3"
                 maxlength="4"
+                minlength="4"
                 inputmode="numeric"
+                pattern="[0-9]{4}"
                 required
               />
             </div>
@@ -105,40 +106,14 @@
         </form>
       </section>
 
-      <section class="status-section">
-        <div class="status-card">
-          <p class="status-date" id="todayText"></p>
-          <h2>실시간 접수 현황 안내</h2>
+      <section class="review-section">
+        <div class="review-header">
+          <p class="review-sub">실시간 고객 후기</p>
+          <h2>지원금 상담 신청 후기</h2>
+        </div>
 
-          <div class="status-counts">
-            <div>
-              <span>오늘의 상담</span>
-              <strong id="todayCount">45</strong>
-            </div>
-
-            <div>
-              <span>진행중</span>
-              <strong id="consultCount">892</strong>
-            </div>
-
-            <div>
-              <span>완료</span>
-              <strong id="installCount">4200</strong>
-            </div>
-          </div>
-
-          <div class="status-table">
-            <div class="table-head">
-              <span>이름</span>
-              <span>구분</span>
-              <span>신청상품</span>
-              <span>진행상태</span>
-            </div>
-
-            <div class="status-scroll-box">
-              <div id="statusList" class="status-list"></div>
-            </div>
-          </div>
+        <div class="review-slider">
+          <div id="reviewTrack" class="review-track"></div>
         </div>
 
         <div class="status-footer">
@@ -156,10 +131,83 @@
     </main>
 
     <div class="modal-overlay" id="privacyModal">
-      <div class="modal-box">
-        <h3>개인정보 취급방침</h3>
-        <p>앙앙</p>
+      <div class="modal-box privacy-modal-box">
+        <h3>개인정보 처리방침</h3>
+
+        <div class="privacy-content">
+          <p>
+            제이지컴퍼니는 개인정보 보호법에 따라 고객님의 개인정보를 안전하게 보호하고,
+            상담 신청 및 서비스 안내 과정에서 발생할 수 있는 고충을 신속하게 처리하기 위해
+            다음과 같이 개인정보 처리방침을 안내합니다.
+          </p>
+
+          <h4>제1조 개인정보의 처리 목적</h4>
+          <p>
+            회사는 인터넷 가입 상담, 신청 확인, 상품 안내, 설치 일정 조율, 혜택 안내,
+            고객 문의 응대 등을 목적으로 개인정보를 처리합니다. 수집된 개인정보는 안내된
+            목적 외의 용도로 사용하지 않으며, 이용 목적이 변경되는 경우 별도의 동의를
+            받습니다.
+          </p>
+
+          <h4>제2조 수집하는 개인정보 항목</h4>
+          <p>
+            회사는 상담 신청 과정에서 성함, 연락처, 희망 통신사, 신청 상품, 상담 가능 시간
+            등의 정보를 수집할 수 있습니다. 해당 정보는 상담 진행 및 고객 요청 사항 확인을
+            위해 필요한 범위 내에서만 이용됩니다.
+          </p>
+
+          <h4>제3조 개인정보의 보유 및 이용기간</h4>
+          <p>
+            회사는 상담 목적 달성 후 개인정보를 지체 없이 파기하는 것을 원칙으로 합니다.
+            다만 관계 법령에 따라 보관이 필요한 경우에는 해당 법령에서 정한 기간 동안
+            보관할 수 있습니다.
+          </p>
+
+          <h4>제4조 개인정보의 제3자 제공</h4>
+          <p>
+            회사는 고객님의 동의 없이 개인정보를 외부에 제공하지 않습니다. 단, 서비스
+            제공을 위해 통신사, 설치 대행사 등 업무상 필요한 범위 내에서 최소한의 정보가
+            전달될 수 있으며, 이 경우 관련 법령에 따라 안전하게 관리됩니다.
+          </p>
+
+          <h4>제5조 개인정보 처리 위탁</h4>
+          <p>
+            회사는 원활한 상담 및 서비스 제공을 위해 필요한 경우 일부 업무를 외부 업체에
+            위탁할 수 있습니다. 위탁 시 개인정보가 안전하게 처리될 수 있도록 관리 및 감독을
+            진행합니다.
+          </p>
+
+          <h4>제6조 정보주체의 권리</h4>
+          <p>
+            고객님은 언제든지 개인정보 열람, 정정, 삭제, 처리정지를 요청할 수 있습니다.
+            요청이 접수되면 회사는 관련 법령에 따라 신속하게 조치합니다.
+          </p>
+
+          <h4>제7조 개인정보의 안전성 확보조치</h4>
+          <p>
+            회사는 개인정보의 분실, 도난, 유출, 변조 또는 훼손을 방지하기 위해 접근 제한,
+            관리 절차 점검, 보안 관리 등 필요한 보호 조치를 시행합니다.
+          </p>
+
+          <h4>제8조 개인정보 관련 문의</h4>
+          <p>
+            개인정보 처리와 관련한 문의, 요청, 불편 사항은 상담센터를 통해 접수하실 수
+            있으며, 회사는 확인 후 신속하게 안내드리겠습니다.
+          </p>
+        </div>
+
         <button type="button" id="privacyClose">닫기</button>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="successModal">
+      <div class="modal-box success-modal-box">
+        <h3>신청 완료</h3>
+        <p>
+          신청이 완료되었습니다.<br />
+          전문 상담원이 연락드리겠습니다.
+        </p>
+        <button type="button" id="successClose">확인</button>
       </div>
     </div>
 
