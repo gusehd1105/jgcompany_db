@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("../fonts/NotoSansKR-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("../fonts/NotoSansKR-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("../fonts/NotoSansKR-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "NotoSansKR", Arial, sans-serif;
+  background: #fff;
+  color: #111;
+  font-weight: 400;
+}
+
+.mobile-page {
+  width: 100%;
+  max-width: 500px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.banner-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.move-form {
+  cursor: pointer;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .mobile-page {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-page {
+    width: 100%;
+  }
+}
