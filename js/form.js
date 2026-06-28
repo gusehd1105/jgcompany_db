@@ -90,10 +90,11 @@ leadForm.addEventListener("submit", async function (e) {
     document.getElementById("result").textContent =
       "";
 
-    // modal.js
-    openSuccessModal();
-    if (window.ttq) {
-  ttq.track("Lead");
+// modal.js
+openSuccessModal();
+
+if (window.ttq) {
+  ttq.track("SubmitApplication");
 }
 
     this.reset();
