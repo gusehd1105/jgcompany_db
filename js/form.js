@@ -92,9 +92,28 @@ leadForm.addEventListener("submit", async function (e) {
 
     // modal.js
     openSuccessModal();
+
+    // TikTok Pixel
     if (window.ttq) {
-  ttq.track("Lead");
-}
+      try {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(phone.replace(/-/g, ""));
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashedPhone = hashArray
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+
+        ttq.identify({
+          phone_number: hashedPhone,
+        });
+
+        ttq.track("Lead", {});
+        ttq.track("CompleteRegistration", {});
+      } catch (pixelError) {
+        console.error("TikTok Pixel Error:", pixelError);
+      }
+    }
 
     this.reset();
 
