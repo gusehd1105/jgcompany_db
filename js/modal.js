@@ -6,9 +6,6 @@ const privacyOpen = document.getElementById("privacyOpen");
 const privacyClose = document.getElementById("privacyClose");
 const privacyModal = document.getElementById("privacyModal");
 
-const successModal = document.getElementById("successModal");
-const successClose = document.getElementById("successClose");
-
 // ===============================
 // 개인정보 처리방침
 // ===============================
@@ -28,30 +25,8 @@ privacyModal.addEventListener("click", (e) => {
 });
 
 // ===============================
-// 신청 완료 팝업
-// ===============================
-
-successClose.addEventListener("click", () => {
-  closeSuccessModal();
-});
-
-successModal.addEventListener("click", (e) => {
-  if (e.target === successModal) {
-    closeSuccessModal();
-  }
-});
-
-// ===============================
 // 함수
 // ===============================
-
-function openSuccessModal() {
-  successModal.classList.add("show");
-}
-
-function closeSuccessModal() {
-  successModal.classList.remove("show");
-}
 
 function openPrivacyModal() {
   privacyModal.classList.add("show");

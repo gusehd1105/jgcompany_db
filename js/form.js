@@ -78,8 +78,7 @@ leadForm.addEventListener("submit", async function (e) {
     document.getElementById("result").textContent = "";
 
     // modal.js
-    openSuccessModal();
-
+    window.location.href = "complete.html";
     // TikTok Pixel
     if (window.ttq) {
       try {

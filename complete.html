@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>신청 완료</title>
+
+    <link rel="stylesheet" href="css/base.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f5f6fa;
+        font-family: "Pretendard", sans-serif;
+      }
+
+      .mobile-page {
+        max-width: 500px;
+        margin: auto;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+      }
+
+      .complete-card {
+        width: 100%;
+        background: #fff;
+        border-radius: 22px;
+        padding: 42px 28px;
+        text-align: center;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .check {
+        width: 90px;
+        height: 90px;
+        margin: auto;
+        border-radius: 50%;
+        background: #16c55b;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+        font-weight: bold;
+      }
+
+      h1 {
+        margin-top: 28px;
+        font-size: 30px;
+        font-weight: 800;
+        color: #222;
+      }
+
+      .desc {
+        margin-top: 18px;
+        color: #666;
+        line-height: 1.8;
+        font-size: 17px;
+      }
+
+      .info {
+        margin-top: 30px;
+        background: #f8f9fb;
+        border-radius: 14px;
+        padding: 18px;
+        color: #555;
+        line-height: 1.8;
+        font-size: 15px;
+      }
+
+      .home-btn {
+        margin-top: 32px;
+        display: block;
+        width: 100%;
+        background: #ed0012;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 12px;
+        padding: 18px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+    </style>
+
+    <!-- TikTok Pixel -->
+    <script>
+      !(function (w, d, t) {
+        w.TiktokAnalyticsObject = t;
+        var ttq = (w[t] = w[t] || []);
+        ttq.methods = [
+          "page",
+          "track",
+          "identify",
+          "instances",
+          "debug",
+          "on",
+          "off",
+          "once",
+          "ready",
+          "alias",
+          "group",
+          "enableCookie",
+          "disableCookie",
+          "holdConsent",
+          "revokeConsent",
+          "grantConsent",
+        ];
+        ttq.setAndDefer = function (t, e) {
+          t[e] = function () {
+            t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        for (var i = 0; i < ttq.methods.length; i++) {
+          ttq.setAndDefer(ttq, ttq.methods[i]);
+        }
+        ttq.load = function (e) {
+          var n = document.createElement("script");
+          n.async = !0;
+          n.src =
+            "https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=" +
+            e +
+            "&lib=ttq";
+          var a = document.getElementsByTagName("script")[0];
+          a.parentNode.insertBefore(n, a);
+        };
+
+        ttq.load("D9LGL13C77UAISU2FO10");
+        ttq.page();
+        ttq.track("CompleteRegistration");
+      })(window, document, "ttq");
+    </script>
+
+    <!-- Meta Pixel -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+
+      fbq("init", "1729414917311895");
+      fbq("track", "PageView");
+      fbq("track", "CompleteRegistration");
+    </script>
+
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1729414917311895&ev=PageView&noscript=1"
+      />
+    </noscript>
+  </head>
+
+  <body>
+    <main class="mobile-page">
+      <div class="complete-card">
+        <div class="check">✓</div>
+
+        <h1>신청이 완료되었습니다.</h1>
+
+        <p class="desc">
+          상담 신청이 정상적으로 접수되었습니다.<br />
+          전문 상담원이 순차적으로 연락드리겠습니다.
+        </p>
+
+        <div class="info">
+          평균 상담 시간은<br />
+          <strong>5분 ~ 30분 이내</strong>입니다.<br /><br />
+
+          잠시만 기다려주세요 😊
+        </div>
+
+        <a href="index.html" class="home-btn"> 홈으로 돌아가기 </a>
+      </div>
+    </main>
+  </body>
+</html>
