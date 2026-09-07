@@ -68,6 +68,7 @@
       })(window, document, "ttq");
     </script>
     <!-- TikTok Pixel Code End -->
+
     <!-- Meta Pixel Code -->
     <script>
       !(function (f, b, e, v, n, t, s) {
@@ -96,6 +97,7 @@
       fbq("init", "1729414917311895");
       fbq("track", "PageView");
     </script>
+
     <noscript
       ><img
         height="1"
@@ -105,6 +107,102 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
     <!-- TikTok Pixel Code End -->
+
+    <!-- 실시간 설치 현황 스타일 -->
+    <style>
+      .live-status-section {
+        background: #025efe;
+        color: #ffffff;
+        padding: 24px 18px 22px;
+        overflow: hidden;
+      }
+
+      .live-status-head {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .live-status-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #42ed73;
+        box-shadow: 0 0 0 4px rgba(66, 237, 115, 0.15);
+        flex-shrink: 0;
+      }
+
+      .live-status-sub {
+        margin-left: auto;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .live-status-window {
+        position: relative;
+        height: 222px;
+        overflow: hidden;
+      }
+
+      .live-status-track {
+        animation: liveStatusScroll 30s linear infinite;
+      }
+
+      .live-item {
+        height: 74px;
+        display: grid;
+        grid-template-columns: 0.75fr 1.25fr 1.5fr auto;
+        align-items: center;
+        gap: 7px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .live-name {
+        font-size: 14px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .live-region {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.78);
+        white-space: nowrap;
+      }
+
+      .live-product {
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .live-paid {
+        padding: 7px 9px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #025efe;
+        font-size: 11px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      @keyframes liveStatusScroll {
+        0% {
+          transform: translateY(0);
+        }
+
+        100% {
+          transform: translateY(-444px);
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -117,6 +215,107 @@
       <img class="banner-img move-form" src="a6.png" alt="안내 배너 6" />
       <img class="banner-img move-form" src="a7.png" alt="안내 배너 7" />
       <img class="banner-img move-form" src="a8.png" alt="안내 배너 8" />
+
+      <!-- 실시간 설치 현황 -->
+      <section class="live-status-section">
+        <div class="live-status-head">
+          <div class="live-status-title">
+            <span class="live-dot"></span>
+            <strong>실시간 설치 현황</strong>
+          </div>
+
+          <span class="live-status-sub">지금도 계속 설치되고 있어요</span>
+        </div>
+
+        <div class="live-status-window">
+          <div class="live-status-track">
+            <div class="live-item">
+              <div class="live-name">김*민</div>
+              <div class="live-region">서울 강서구</div>
+              <div class="live-product">인터넷+TV</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">이*현</div>
+              <div class="live-region">인천 남동구</div>
+              <div class="live-product">인터넷+TV+유심</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">박*진</div>
+              <div class="live-region">경기 수원시</div>
+              <div class="live-product">인터넷</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">최*영</div>
+              <div class="live-region">대전 서구</div>
+              <div class="live-product">인터넷+TV</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">정*우</div>
+              <div class="live-region">부산 해운대구</div>
+              <div class="live-product">인터넷+TV+유심</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">한*희</div>
+              <div class="live-region">경기 성남시</div>
+              <div class="live-product">인터넷+TV</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <!-- 자연스러운 무한 반복 -->
+            <div class="live-item">
+              <div class="live-name">김*민</div>
+              <div class="live-region">서울 강서구</div>
+              <div class="live-product">인터넷+TV</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">이*현</div>
+              <div class="live-region">인천 남동구</div>
+              <div class="live-product">인터넷+TV+유심</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">박*진</div>
+              <div class="live-region">경기 수원시</div>
+              <div class="live-product">인터넷</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">최*영</div>
+              <div class="live-region">대전 서구</div>
+              <div class="live-product">인터넷+TV</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">정*우</div>
+              <div class="live-region">부산 해운대구</div>
+              <div class="live-product">인터넷+TV+유심</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+
+            <div class="live-item">
+              <div class="live-name">한*희</div>
+              <div class="live-region">경기 성남시</div>
+              <div class="live-product">인터넷+TV</div>
+              <div class="live-paid">✓ 당일입금</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section class="form-section" id="formSection">
         <form id="leadForm">
@@ -223,36 +422,6 @@
       </section>
 
       <section class="review-section">
-        <div class="review-header">
-          <img
-            class="review-title-img"
-            src="review-title.png"
-            alt="리얼 설치 후기"
-          />
-
-          <div class="review-stats">
-            <div>
-              <span>누적 상담</span>
-              <i>👥</i>
-              <strong>12,847명</strong>
-            </div>
-            <div>
-              <span>고객 만족도</span>
-              <i>💚</i>
-              <strong>98.7%</strong>
-            </div>
-            <div>
-              <span>평균 평점</span>
-              <i>⭐</i>
-              <strong>4.9점</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="review-slider">
-          <div id="reviewTrack" class="review-track"></div>
-        </div>
-
         <div class="status-footer">
           <p>
             인터넷 가입 상담센터<br />
