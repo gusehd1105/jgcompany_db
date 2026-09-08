@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="css/review.css" />
     <link rel="stylesheet" href="css/modal.css" />
 
+    <!-- 실시간 현황 Pretendard -->
+    <link
+      rel="stylesheet"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
+
     <!-- TikTok Pixel Code Start -->
     <script>
       !(function (w, d, t) {
@@ -118,192 +125,133 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <!-- 실시간 현황 스타일 -->
+    <!-- 실시간 상담 현황 스타일 -->
     <style>
       .live-status-section {
         position: relative;
         overflow: hidden;
-        padding: 38px 18px 30px;
+        box-sizing: border-box;
+        padding: 40px 17px 32px;
         background: #025efe;
-        color: #ffffff;
+        font-family:
+          "Pretendard",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .live-status-section * {
+        box-sizing: border-box;
+        font-family:
+          "Pretendard",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
       }
 
       .live-status-section::before {
         content: "";
         position: absolute;
-        width: 300px;
-        height: 300px;
-        top: -210px;
-        right: -145px;
+        top: -190px;
+        right: -140px;
+        width: 320px;
+        height: 320px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.09);
+        background: rgba(255, 255, 255, 0.08);
         pointer-events: none;
       }
 
       .live-status-section::after {
         content: "";
         position: absolute;
-        width: 220px;
-        height: 220px;
-        left: -140px;
-        bottom: -155px;
+        bottom: -160px;
+        left: -150px;
+        width: 280px;
+        height: 280px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.055);
+        background: rgba(255, 255, 255, 0.05);
         pointer-events: none;
       }
 
-      .live-dashboard {
+      .live-status-inner {
         position: relative;
         z-index: 2;
       }
 
-      .live-top {
-        text-align: center;
-        margin-bottom: 24px;
-      }
-
-      .live-date {
-        display: inline-flex;
+      .live-title-area {
+        display: flex;
         align-items: center;
-        gap: 6px;
-        margin-bottom: 10px;
-        padding: 6px 11px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.1);
-        font-size: 11px;
-        font-weight: 700;
-        color: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 25px;
       }
 
-      .live-date-dot {
+      .live-title-dot {
         position: relative;
-        width: 7px;
-        height: 7px;
+        width: 9px;
+        height: 9px;
+        flex: 0 0 9px;
         border-radius: 50%;
-        background: #48e982;
+        background: #45ed82;
+        box-shadow: 0 0 0 6px rgba(69, 237, 130, 0.13);
       }
 
-      .live-date-dot::after {
+      .live-title-dot::after {
         content: "";
         position: absolute;
         inset: 0;
         border-radius: 50%;
-        background: #48e982;
-        animation: livePulse 2s ease-out infinite;
+        background: #45ed82;
+        animation: liveDotPulse 2.2s ease-out infinite;
       }
 
       .live-main-title {
         margin: 0;
-        font-size: 27px;
-        line-height: 1.25;
-        font-weight: 900;
-        letter-spacing: -1.4px;
         color: #ffffff;
-      }
-
-      .live-description {
-        margin: 8px 0 0;
-        font-size: 12px;
-        line-height: 1.5;
-        font-weight: 500;
-        letter-spacing: -0.3px;
-        color: rgba(255, 255, 255, 0.72);
-      }
-
-      .live-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        margin-bottom: 17px;
-        padding: 19px 5px 18px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.11);
-        box-shadow:
-          0 16px 40px rgba(0, 38, 140, 0.14),
-          inset 0 1px 0 rgba(255, 255, 255, 0.09);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
-
-      .live-stat {
-        position: relative;
-        text-align: center;
-        padding: 2px 5px;
-      }
-
-      .live-stat:not(:last-child)::after {
-        content: "";
-        position: absolute;
-        top: 3px;
-        bottom: 3px;
-        right: 0;
-        width: 1px;
-        background: rgba(255, 255, 255, 0.17);
-      }
-
-      .live-stat-number-wrap {
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-        gap: 2px;
-        margin-bottom: 7px;
-      }
-
-      .live-stat-number {
-        font-size: 28px;
-        line-height: 1;
-        font-weight: 900;
-        letter-spacing: -1.4px;
-        color: #ffffff;
-        font-variant-numeric: tabular-nums;
-      }
-
-      .live-stat-unit {
-        font-size: 11px;
-        font-weight: 700;
-        color: rgba(255, 255, 255, 0.72);
-      }
-
-      .live-stat-label {
-        display: block;
-        font-size: 11px;
-        line-height: 1.25;
-        font-weight: 700;
-        letter-spacing: -0.3px;
-        color: rgba(255, 255, 255, 0.82);
+        font-size: 29px;
+        line-height: 1.15;
+        font-weight: 800;
+        letter-spacing: -1.35px;
       }
 
       .live-board {
         overflow: hidden;
-        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 21px;
         background: #ffffff;
-        box-shadow: 0 18px 45px rgba(0, 28, 105, 0.18);
+        box-shadow:
+          0 20px 45px rgba(0, 28, 105, 0.18),
+          0 4px 12px rgba(0, 40, 150, 0.08);
       }
 
       .live-board-head {
         display: grid;
-        grid-template-columns: 0.85fr 1.45fr 1fr;
+        grid-template-columns: 0.82fr 1.48fr 1fr;
         align-items: center;
-        height: 47px;
-        padding: 0 17px;
-        border-bottom: 1px solid #eef2f6;
-        background: #f8faff;
-        color: #8b95a1;
-        font-size: 11px;
+        height: 56px;
+        padding: 0 19px;
+        border-bottom: 1px solid #e9edf3;
+        background: #f7f9fc;
+      }
+
+      .live-board-head span {
+        color: #6b7684;
+        font-size: 14px;
+        line-height: 1;
         font-weight: 700;
-        letter-spacing: -0.2px;
+        letter-spacing: -0.35px;
       }
 
       .live-board-head span:last-child {
         text-align: right;
+        padding-right: 7px;
       }
 
       .live-list-window {
         position: relative;
-        height: 300px;
+        height: 340px;
         overflow: hidden;
         background: #ffffff;
       }
@@ -312,10 +260,10 @@
       .live-list-window::after {
         content: "";
         position: absolute;
-        z-index: 5;
+        z-index: 10;
         left: 0;
         right: 0;
-        height: 18px;
+        height: 14px;
         pointer-events: none;
       }
 
@@ -323,7 +271,7 @@
         top: 0;
         background: linear-gradient(
           to bottom,
-          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0.96),
           rgba(255, 255, 255, 0)
         );
       }
@@ -332,46 +280,50 @@
         bottom: 0;
         background: linear-gradient(
           to top,
-          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0.96),
           rgba(255, 255, 255, 0)
         );
       }
 
       .live-list-track {
         will-change: transform;
-        animation: liveListScroll 78s linear infinite;
+        animation: liveListMove 86s linear infinite;
       }
 
       .live-list-row {
         display: grid;
-        grid-template-columns: 0.85fr 1.45fr 1fr;
+        grid-template-columns: 0.82fr 1.48fr 1fr;
         align-items: center;
-        height: 60px;
-        padding: 0 17px;
-        border-bottom: 1px solid #f1f3f5;
+        height: 68px;
+        padding: 0 19px;
+        border-bottom: 1px solid #f0f2f5;
         background: #ffffff;
       }
 
       .live-list-name {
-        font-size: 14px;
-        font-weight: 800;
-        letter-spacing: -0.4px;
         color: #191f28;
+        font-size: 16px;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -0.45px;
+        white-space: nowrap;
       }
 
       .live-list-region {
         overflow: hidden;
-        padding-right: 5px;
-        font-size: 13px;
+        padding-right: 6px;
+        color: #333d4b;
+        font-size: 15px;
+        line-height: 1;
         font-weight: 600;
-        letter-spacing: -0.35px;
-        color: #4e5968;
+        letter-spacing: -0.45px;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
       .live-list-status {
         display: flex;
+        align-items: center;
         justify-content: flex-end;
       }
 
@@ -379,100 +331,93 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 70px;
-        padding: 7px 9px;
+        min-width: 78px;
+        min-height: 34px;
+        padding: 8px 12px;
         border-radius: 999px;
-        font-size: 11px;
+        font-size: 13px;
         line-height: 1;
-        font-weight: 800;
-        letter-spacing: -0.3px;
+        font-weight: 700;
+        letter-spacing: -0.4px;
         white-space: nowrap;
       }
 
       .live-status-badge.paid {
-        background: #e9fbf1;
-        color: #0cae63;
+        background: #e6f8ee;
+        color: #09a963;
       }
 
       .live-status-badge.applied {
-        background: #eaf2ff;
-        color: #1b64da;
+        background: #e8f1ff;
+        color: #2573e8;
       }
 
       .live-status-badge.waiting {
-        background: #f2f4f6;
-        color: #8b95a1;
+        background: #f0f2f4;
+        color: #7b8490;
       }
 
-      .live-example-note {
-        margin-top: 9px;
-        text-align: right;
-        font-size: 9px;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.52);
-      }
-
-      @keyframes livePulse {
+      @keyframes liveDotPulse {
         0% {
           transform: scale(1);
-          opacity: 0.75;
+          opacity: 0.8;
         }
 
         70% {
-          transform: scale(2.6);
+          transform: scale(2.8);
           opacity: 0;
         }
 
         100% {
-          transform: scale(2.6);
+          transform: scale(2.8);
           opacity: 0;
         }
       }
 
-      @keyframes liveListScroll {
+      @keyframes liveListMove {
         0% {
           transform: translateY(0);
         }
 
         100% {
-          transform: translateY(-1800px);
+          transform: translateY(-2040px);
         }
       }
 
       @media (max-width: 390px) {
         .live-status-section {
-          padding-left: 14px;
-          padding-right: 14px;
+          padding: 36px 13px 28px;
         }
 
         .live-main-title {
-          font-size: 25px;
-        }
-
-        .live-stat-number {
-          font-size: 25px;
+          font-size: 27px;
         }
 
         .live-board-head,
         .live-list-row {
-          grid-template-columns: 0.8fr 1.4fr 1fr;
-          padding-left: 14px;
-          padding-right: 14px;
+          grid-template-columns: 0.78fr 1.42fr 1fr;
+          padding-left: 15px;
+          padding-right: 15px;
         }
 
-        .live-list-name {
+        .live-board-head span {
           font-size: 13px;
         }
 
+        .live-list-name {
+          font-size: 15px;
+        }
+
         .live-list-region {
-          font-size: 12px;
+          font-size: 14px;
         }
 
         .live-status-badge {
-          min-width: 65px;
-          padding-left: 8px;
-          padding-right: 8px;
-          font-size: 10px;
+          min-width: 72px;
+          min-height: 32px;
+          padding-left: 9px;
+          padding-right: 9px;
+          font-size: 12px;
         }
       }
     </style>
@@ -489,68 +434,19 @@
       <img class="banner-img move-form" src="a7.png" alt="안내 배너 7" />
       <img class="banner-img move-form" src="a8.png" alt="안내 배너 8" />
 
-      <!-- 실시간 현황 -->
+      <!-- 실시간 상담 현황 -->
       <section class="live-status-section">
-        <div class="live-dashboard">
-          <div class="live-top">
-            <div class="live-date">
-              <span class="live-date-dot"></span>
-              <span id="liveCurrentDate">2026.09.08 · LIVE</span>
-            </div>
-
-            <h2 class="live-main-title">실시간 지원금 상담 현황</h2>
-
-            <p class="live-description">
-              오늘도 전국에서 상담과 설치가 진행 중입니다
-            </p>
-          </div>
-
-          <div class="live-stats">
-            <div class="live-stat">
-              <div class="live-stat-number-wrap">
-                <strong
-                  class="live-stat-number"
-                  data-target="71"
-                  data-start="54"
-                  >54</strong
-                >
-                <span class="live-stat-unit">건</span>
-              </div>
-              <span class="live-stat-label">오늘 상담</span>
-            </div>
-
-            <div class="live-stat">
-              <div class="live-stat-number-wrap">
-                <strong
-                  class="live-stat-number"
-                  data-target="1087"
-                  data-start="1031"
-                  >1,031</strong
-                >
-                <span class="live-stat-unit">건</span>
-              </div>
-              <span class="live-stat-label">가입상담 중</span>
-            </div>
-
-            <div class="live-stat">
-              <div class="live-stat-number-wrap">
-                <strong
-                  class="live-stat-number"
-                  data-target="5001"
-                  data-start="4938"
-                  >4,938</strong
-                >
-                <span class="live-stat-unit">건</span>
-              </div>
-              <span class="live-stat-label">설치 완료</span>
-            </div>
+        <div class="live-status-inner">
+          <div class="live-title-area">
+            <span class="live-title-dot"></span>
+            <h2 class="live-main-title">실시간 상담 현황</h2>
           </div>
 
           <div class="live-board">
             <div class="live-board-head">
               <span>이름</span>
               <span>설치 지역</span>
-              <span>상태</span>
+              <span>진행 상태</span>
             </div>
 
             <div class="live-list-window">
@@ -795,7 +691,7 @@
                   </div>
                 </div>
 
-                <!-- 자연스러운 무한 연결을 위한 앞부분 복제 -->
+                <!-- 무한 연결용 첫 5개 반복 -->
                 <div class="live-list-row">
                   <div class="live-list-name">김*민</div>
                   <div class="live-list-region">서울 송파구</div>
@@ -837,10 +733,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="live-example-note">
-            표시된 명단은 화면 구성 예시입니다.
           </div>
         </div>
       </section>
@@ -1044,47 +936,6 @@
         <button type="button" id="privacyClose">닫기</button>
       </div>
     </div>
-
-    <script>
-      // 실시간 현황 날짜 자동 표시
-      const liveDateElement = document.getElementById("liveCurrentDate");
-
-      if (liveDateElement) {
-        const now = new Date();
-
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, "0");
-        const day = String(now.getDate()).padStart(2, "0");
-
-        liveDateElement.textContent = `${year}.${month}.${day} · LIVE`;
-      }
-
-      // 상단 숫자 천천히 카운트업
-      const liveCounters = document.querySelectorAll(".live-stat-number");
-
-      liveCounters.forEach((counter) => {
-        const target = Number(counter.dataset.target);
-        const start = Number(counter.dataset.start);
-
-        let current = start;
-
-        const duration = 6500;
-        const interval = 80;
-        const totalSteps = duration / interval;
-        const increment = (target - start) / totalSteps;
-
-        const timer = setInterval(() => {
-          current += increment;
-
-          if (current >= target) {
-            current = target;
-            clearInterval(timer);
-          }
-
-          counter.textContent = Math.floor(current).toLocaleString("ko-KR");
-        }, interval);
-      });
-    </script>
 
     <script src="js/config.js"></script>
     <script src="js/common.js"></script>
